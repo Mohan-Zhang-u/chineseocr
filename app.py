@@ -9,6 +9,8 @@ import web
 import numpy as np
 import uuid
 from PIL import Image
+import _locale 
+_locale._getdefaultlocale = (lambda *args: ['en_US', 'utf8'])
 web.config.debug  = True
 
 filelock='file.lock'
@@ -119,9 +121,12 @@ class OCR:
         post['width'] = 600
         post['W'] = 600
         post['billList'] = billList
+        print("stat OCR GET")
+        print(post)
         return render.ocr(post)
 
     def POST(self):
+        print("stat OCR POST1")
         t = time.time()
         data = web.data()
         uidJob = uuid.uuid1().__str__()
@@ -138,6 +143,7 @@ class OCR:
             
         H,W = img.shape[:2]
 
+        print("stat OCR POST2")
         while time.time()-t<=TIMEOUT:
             if os.path.exists(filelock):
                 continue

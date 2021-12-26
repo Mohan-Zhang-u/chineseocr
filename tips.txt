@@ -1,0 +1,5 @@
+sudo docker run -d -p 8080:9898 znsoft/chineseocr
+run -it -p 8080:9898 znsoft/chineseocr
+
+docker ps –a
+docker stop [option] container_id
